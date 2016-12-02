@@ -1,0 +1,33 @@
+{
+  "name": "pizza_game",
+  "version": "1.0.0",
+  "description": "A simple 2 player pizza game",
+  "main": "lib/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "eslint": "^3.11.1",
+    "jasmine": "^2.5.2",
+    "lite-server": "^2.2.2"
+  },
+  "scripts": {
+    "lite": "lite-server",
+    "build": "babel src --out-dir lib",
+    "build:w": "babel src --watch --out-dir lib",
+    "test": "npm run build && jasmine",
+    "lint": "eslint src/index.js",
+    "start": "concurrently \"npm run build:w\" \"npm run lite\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intrip/PizzaGame.git"
+  },
+  "author": "Jacopo Beschi @intrip",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/intrip/PizzaGame/issues"
+  },
+  "homepage": "https://github.com/intrip/PizzaGame#readme"
+}
