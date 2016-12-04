@@ -5,14 +5,14 @@ class RandomGenerator {
    }
 
    call() {
-      if(!this.valid()) {
+      if(!this._valid()) {
          throw new TypeError("Invalid parameters");
       }
 
       return Math.floor(this.min + (Math.random() * (this.max - this.min) ));
    }
 
-   valid() {
+   _valid() {
       return this._isInt(this.min) && this._isInt(this.max);
    }
 

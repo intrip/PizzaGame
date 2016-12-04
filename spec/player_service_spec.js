@@ -23,11 +23,11 @@ describe("PlayerService", function () {
       expect(subject.next()).toEqual(player2);
       expect(subject.next()).toEqual(player1);
     });
-  })
+  });
 
   describe('#currentPlayer', function () {
     it('returns the current player', function () {
-        expect(subject.currentPlayer()).toEqual(player1);
+      expect(subject.currentPlayer()).toEqual(player1);
     });
-  })
+  });
 });

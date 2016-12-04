@@ -5,22 +5,23 @@ const PlayerService = require('../lib/player_service.js');
 const Player = require('../lib/player.js');
 const RandomGenerator = require('../lib/random_generator.js');
 const EatPizzaService = require('../lib/eat_pizza_service.js');
+const PizzaGameFactory = require('../lib/pizza_game_factory.js');
 
 describe("PizzaGame", function () {
   let subject, sliceCount;
 
   function createSubject() {
-    //@todo: use a factory class
-    let player1 = new Player({firstName: 'jacopo', lastName: 'beschi'});
-    let player2 = new Player({firstName: 'foo', lastName: 'bar'});
-    let playerService = new PlayerService(player1, player2);
-    let eatPizzaService = new EatPizzaService(new RandomGenerator({min: 10, max: 100}));
-    subject = new PizzaGame({playerService: playerService, eatPizzaService: eatPizzaService});
+    let players = [{firstName: 'jacopo', lastName: 'beschi'},{firstName: 'foo', lastName: 'bar'}];
+    subject = new PizzaGameFactory({players: players, maxPizzaCount: 100}).call();
   }
 
   beforeEach(function () {
     sliceCount = 2;
     createSubject();
+  });
+
+  it('has gameOver === false at start', function () {
+    expect(subject.gameOver).toBe(false);
   });
 
   describe('#call', function () {

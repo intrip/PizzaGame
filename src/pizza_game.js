@@ -15,10 +15,6 @@ class PizzaGame {
     }
   }
 
-  _noEatOptionsLeft() {
-    return this.eatOptions().length === 0;
-  }
-
   eatOptions() {
     return this.eatPizzaService.eatOptions(this.lastEatSize);
   }
@@ -47,6 +43,10 @@ class PizzaGame {
 
   _saveLastEatSize() {
     this.lastEatSize = this._size;
+  }
+
+  _noEatOptionsLeft() {
+    return this.eatOptions().length === 0;
   }
 
   _updateGameOver() {

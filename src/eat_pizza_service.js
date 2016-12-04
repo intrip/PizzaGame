@@ -5,6 +5,10 @@ class EatPizzaService {
      this._generatePizzas();
    }
 
+   _generatePizzas() {
+     this.pizzasCount = this.randomGenerator.call();
+   }
+
    eat(pizzaSlices, excluded = null) {
       if(!this._isValidSize(pizzaSlices)) {
          this._invalidSizeError();
@@ -18,6 +22,16 @@ class EatPizzaService {
       return this.anyPizzaLeft();
    }
 
+   _isValidSize(pizzaSlices) {
+     let valid = false;
+     this.eatOptions().forEach(function (option) {
+       if(option == pizzaSlices) {
+         valid = true;
+       }
+     })
+     return valid;
+   }
+
    _invalidSizeError(excluded = null) {
      throw new TypeError(`Numero pizze invalido, opzioni valide: ${this.eatOptions(excluded)}`);
    }
@@ -26,25 +40,11 @@ class EatPizzaService {
       return UNFILTERED_EAT_OPTIONS.slice(0,this.pizzasCount)
         .filter((el) => {
           return el != excluded;
-        });;
+        });
    }
 
    anyPizzaLeft() {
       return this.pizzasCount > 0;
-   }
-
-   _isValidSize(pizzaSlices) {
-      let valid = false;
-      this.eatOptions().forEach(function (option) {
-         if(option == pizzaSlices) {
-            valid = true;
-         }
-      })
-      return valid;
-   }
-
-   _generatePizzas() {
-      this.pizzasCount = this.randomGenerator.call();
    }
 }
 
