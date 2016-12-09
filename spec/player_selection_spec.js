@@ -17,6 +17,10 @@ describe('PlayerSelection', () => {
     fixture.cleanup();
   });
 
+  it('is created with 100 maxPizzaCount', () => {
+    expect(subject.maxPizzaCount).toEqual(100);
+  });
+
   describe('#call', () => {
     it('validates_presence_of player1 first_name', () => {
       submit();

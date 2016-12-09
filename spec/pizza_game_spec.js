@@ -20,7 +20,7 @@ describe("PizzaGame", () => {
     fixture.cleanup();
   });
 
-  it('has gameOver === false at start', () => {
+  it('is created with gameOver === false', () => {
     expect(subject.gameOver).toBe(false);
   });
 
@@ -35,11 +35,11 @@ describe("PizzaGame", () => {
   })
 
   describe('#_updateUI', () => {
-    it('init the message', () => {
+    it('updates the message', () => {
       expect(document.getElementById('js-message').innerHTML).toEqual(subject.message());
     });
 
-    it('init the pizza-slices-count select options', () => {
+    it('updates the pizza-slices-count select options', () => {
       expect(select().options.length).toEqual(subject.eatOptions().length);
     });
 
@@ -48,7 +48,7 @@ describe("PizzaGame", () => {
         spyOn(subject.eatPizzaService,'eatOptions').and.returnValue([]);
         subject._updateUI();
       });
-      it('sets "nessuna pizza" option when no eatOptions are left', () => {
+      it('sets "nessuna pizza" option', () => {
         expect(select().options.length).toEqual(1);
         expect(select().options[0]).toEqual(new Option('nessuna pizza',null));
       });
@@ -75,16 +75,6 @@ describe("PizzaGame", () => {
       expect(service.next).toHaveBeenCalled();
     });
 
-    it("doesn't move to next player if gameOver", () => {
-      let service = subject.playerService;
-      spyOn(service, 'next').and.callThrough();
-      subject.eatPizzaService.pizzasCount = 2;
-
-      subject.call(sliceCount);
-
-      expect(service.next).not.toHaveBeenCalled();
-    });
-
     it('sets lastEatSize', () => {
       subject.call(1);
 
@@ -96,7 +86,7 @@ describe("PizzaGame", () => {
         subject.eatPizzaService.pizzasCount = 1;
         subject.lastEatSize = 1;
       });
-      it('moves to next player if is not gameOver and eatOptions is empty', () => {
+      it('moves to next player without eating a pizza', () => {
         spyOn(subject.eatPizzaService,'eat');
         spyOn(subject.playerService,'next');
         spyOn(subject, '_updateUI');
@@ -177,14 +167,18 @@ describe("PizzaGame", () => {
       subject.eatPizzaService.pizzasCount = 1;
         expect(subject.message()).toEqual("jacopo beschi fai la tua mossa. (pizze disponibili: 1)");
     });
-    it('returns gameover message if gameover', () => {
+    it('returns gameover message', () => {
       subject.gameOver = true;
       expect(subject.message()).toEqual("Mi dispiace jacopo beschi, hai perso!");
     });
 
-    it('returns no movie available if there are no eatOptions and is not gameOver', function () {
-      spyOn(subject.eatPizzaService, 'eatOptions').and.returnValue([]);
-      expect(subject.message()).toEqual(`jacopo beschi, non hai mosse disponibili. Devi passare il turno. (pizze disponibili: ${subject.eatPizzaService.pizzasCount})`);
+    describe('there are no eatOptions and is not gameOver', () => {
+      beforeEach(() => {
+        spyOn(subject.eatPizzaService, 'eatOptions').and.returnValue([]);
+      });
+      it('returns no options available', function () {
+        expect(subject.message()).toEqual(`jacopo beschi, non hai mosse disponibili. Devi passare il turno. (pizze disponibili: ${subject.eatPizzaService.pizzasCount})`);
+      });
     });
   });
 });

@@ -9,6 +9,12 @@ class EatPizzaService {
     this.pizzasCount = this.randomGenerator.call();
   }
 
+  /**
+   * Eats a pizza of a given slice
+   * @param [int] pizzaSlices
+   * @param [bool] excluded if any size needs to be excluded from the options
+   * @return [bool] if any pizza is left
+   */
   eat(pizzaSlices, excluded = null) {
     if (!this._isValidSize(pizzaSlices)) {
       this._invalidSizeError();
@@ -41,6 +47,10 @@ class EatPizzaService {
       .filter((el) => { return el !== excluded; });
   }
 
+  /**
+   * Verify if any pizza is left
+   * @returns [bool] if any pizza is left
+   */
   anyPizzaLeft() {
     return this.pizzasCount > 0;
   }

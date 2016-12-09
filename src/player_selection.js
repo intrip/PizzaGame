@@ -1,6 +1,6 @@
 class PlayerSelection {
   constructor() {
-    this.maxPizzaCount = 15;
+    this.maxPizzaCount = 100;
     this._bootstrap();
   }
 
@@ -20,16 +20,16 @@ class PlayerSelection {
     this._createGame();
   }
 
+  _createPlayers() {
+    this.player1 = new Player(PlayerSelection.playerInfo(1));
+    this.player2 = new Player(PlayerSelection.playerInfo(2));
+  }
+
   _createGame() {
     this.pizzaGame = new PizzaGameFactory({
       players: [PlayerSelection.playerInfo(1), PlayerSelection.playerInfo(2)],
       maxPizzaCount: this.maxPizzaCount,
     }).call();
-  }
-
-  _createPlayers() {
-    this.player1 = new Player(PlayerSelection.playerInfo(1));
-    this.player2 = new Player(PlayerSelection.playerInfo(2));
   }
 
   _validate() {
@@ -56,6 +56,9 @@ class PlayerSelection {
     });
   }
 
+  /**
+   * Clears the ui errors
+   */
   static clearErrors() {
     document.getElementById('js-error-player1-firstName').innerHTML = '';
     document.getElementById('js-error-player1-lastName').innerHTML = '';
@@ -69,6 +72,9 @@ class PlayerSelection {
     return { firstName, lastName };
   }
 
+  /**
+   * Hides the player selectio ui and shows the gameplay ui
+   */
   static showGame() {
     document.getElementById('js-player-selection').style.display = 'none';
     document.getElementById('js-game-info').style.display = 'block';

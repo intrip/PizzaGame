@@ -10,15 +10,26 @@ class PizzaGame {
     this._updateUI();
     this._attachListeners();
   }
+
   _attachListeners() {
     document.getElementById('submit').addEventListener('click', () => {
       this.call(PizzaGame.currentSelectVal());
     });
   }
 
+  /**
+   * @return [Int|Null] the current select value
+   */
   static currentSelectVal() {
     const selectedOption = PizzaGame.select().options[PizzaGame.select().selectedIndex];
     return selectedOption.value !== 'null' ? parseInt(selectedOption.value, 10) : null;
+  }
+
+  /**
+   * @return [HtmlElement] the select slice size
+   */
+  static select() {
+    return document.getElementById('js-pizza-slices-count');
   }
 
   _updateUI() {
@@ -34,20 +45,20 @@ class PizzaGame {
     const selectOptions = [];
     PizzaGame.select().options.length = 0;
 
-    this.eatOptions().forEach((option) => {
-      PizzaGame.select().options[PizzaGame.select().options.length] = new Option(option, option);
-    });
-
     // handle no eatOptions left case
     if (this.eatOptions().length === 0) {
       PizzaGame.select().options[0] = new Option('nessuna pizza', null);
+    } else {
+      this.eatOptions().forEach((option) => {
+        PizzaGame.select().options[PizzaGame.select().options.length] = new Option(option, option);
+      });
     }
   }
 
-  static select() {
-    return document.getElementById('js-pizza-slices-count');
-  }
-
+  /**
+   * Used to obtain the game info message
+   * @return [String] message
+   */
   message() {
     if (this.gameOver) {
       return `Mi dispiace ${this.playerService.currentPlayer()}, hai perso!`;
@@ -66,6 +77,9 @@ class PizzaGame {
   }
 
   /**
+   * The main game method, when called applies the game logic
+   * and updates the ui
+   * @param size [Int|null] the size of the pizza slices to eat
    * @throws [TypeError] when size is invalid
    */
   call(size = null) {

@@ -10,7 +10,7 @@ describe("EatPizzaService", () => {
 
       expect(subject.pizzasCount).toBeGreaterThan(9);
       expect(subject.pizzasCount).toBeLessThan(101);
-   })
+   });
 
    describe('#eatOptions', () => {
       it('returns an array of all the possible eat options', () => {
@@ -30,7 +30,7 @@ describe("EatPizzaService", () => {
          expect(subject.eatOptions()).toEqual([]);
       });
 
-      it('excludes the exclude element if passed', () => {
+      it('excludes the excluded option if given', () => {
         createSubject();
         expect(subject.eatOptions(1)).toEqual([2,3]);
       })
@@ -83,5 +83,5 @@ describe("EatPizzaService", () => {
 
          expect(subject.eat(3)).toBe(false);
       });
-   })
+   });
 });
