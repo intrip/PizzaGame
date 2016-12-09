@@ -7,13 +7,56 @@
    <meta name="author" content="Jacopo Beschi">
 
    <script src="random_generator.js"></script>
-   <script src="pizza_service.js"></script>
-   <script src="pizza.js"></script>
+   <script src="eat_pizza_service.js"></script>
+   <script src="player.js"></script>
    <script src="player_service.js"></script>
+   <script src="pizza_game_factory.js"></script>
    <script src="pizza_game.js"></script>
+   <script src="player_selection.js"></script>
    <script src="main.js"></script>
 </head>
 <body>
+  <h1>Pizza Game</h1>
 
+  <div class="container">
+    <div class="description">
+      <!--  here add the rules -->
+    </div>
+    <div id="js-player-selection">
+      <div>
+        <div><h3>Giocatore1</h3></div>
+        <label for="js-player1-first-name">Nome:
+          <input type="text" id="js-player1-first-name">
+          <span class="text text-danger" id="js-error-player1-firstName"></span>
+        </label>
+        <label for="js-player2-first-name">Cognome:
+          <input type="text" id="js-player1-last-name">
+          <span class="text text-danger" id="js-error-player1-lastName"></span>
+        </label>
+      </div>
+      <div>
+        <div><h3>Giocatore2</h3></div>
+        <label for="js-player2-first-name">Nome:
+          <input type="text" id="js-player2-first-name">
+          <span class="text text-danger" id="js-error-player2-firstName"></span>
+        </label>
+        <label for="js-player2-last-name">Cognome:
+          <input type="text" id="js-player2-last-name">
+          <span class="text text-danger" id="js-error-player2-lastName"></span>
+        </label>
+      </div>
+      <div>
+        <button id="submit-players">Conferma</button>
+      </div>
+    </div>
+
+    <div id="js-game-info" style="display:none">
+      <div id="js-message"></div>
+        <select id="js-pizza-slices-count"></select>
+      <div>
+        <button id="submit">Vai</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

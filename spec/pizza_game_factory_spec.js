@@ -1,14 +1,13 @@
-"use strict";
-
-const PizzaGameFactory = require('../lib/pizza_game_factory.js');
-const PizzaGame = require('../lib/pizza_game.js');
-const PlayerService = require('../lib/player_service.js');
-const Player = require('../lib/player.js');
-const RandomGenerator = require('../lib/random_generator.js');
-const EatPizzaService = require('../lib/eat_pizza_service.js');
-
 describe('PizzaGameFactory', function () {
-  it('creates a new pizzaGame', function () {
+  beforeEach( () => {
+    fixture.load('game.html');
+  });
+
+  afterEach(() => {
+    fixture.cleanup();
+  });
+  
+  it('creates a new pizzaGame', () => {
     let players= [{firstName: 'jacopo', lastName: 'beschi'},
                   {firstName: 'foo', lastName: 'bar'}];
     let maxPizzaCount = 100;

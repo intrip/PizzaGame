@@ -1,5 +1,5 @@
 class Player {
-  constructor({firstName, lastName}) {
+  constructor({ firstName, lastName }) {
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -7,8 +7,21 @@ class Player {
   toString() {
     return `${this.firstName} ${this.lastName}`;
   }
-}
 
-if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
-   module.exports = Player;
+  isValid() {
+    this.errors = {};
+
+    this._validateNotEmpty('firstName');
+    this._validateNotEmpty('lastName');
+
+    return Object.keys(this.errors).length === 0;
+  }
+
+  _validateNotEmpty(field) {
+    const val = this[field];
+    if (typeof val === 'string' && val.length > 0) {
+      return;
+    }
+    this.errors[field] = 'campo obbligatorio';
+  }
 }

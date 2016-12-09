@@ -1,3 +1,3 @@
-window.onbeforeunload = function(e) {
-      new PizzaService();
-};
+document.addEventListener('DOMContentLoaded', (event) => {
+  new PlayerSelection();
+});

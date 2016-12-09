@@ -1,8 +1,3 @@
-"use strict";
-
-const EatPizzaService = require('../lib/eat_pizza_service.js');
-const RandomGenerator = require('../lib/random_generator.js');
-
 describe("EatPizzaService", function () {
    let subject;
 

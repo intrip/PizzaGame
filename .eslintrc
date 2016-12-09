@@ -2,5 +2,21 @@
   "env": {
     "browser": true,
     "es6": true
-  }
+  },
+  "rules" : {
+    "no-underscore-dangle" : 0,
+    "no-prototype-builtins": 0,
+    "vars-on-top": 0,
+    "no-var": 0,
+    "global-require": 0,
+    "block-scoped-var": 0,
+    "arrow-body-style": 0
+    },
+  "extends": "airbnb-base",
+  "globals": {
+    "gl": false,
+  },
+    "plugins": [
+    "filenames"
+  ]
 }

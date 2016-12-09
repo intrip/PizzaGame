@@ -1,8 +1,3 @@
-"use strict";
-
-const PlayerService = require('../lib/player_service.js');
-const Player = require('../lib/player.js');
-
 describe("PlayerService", function () {
   let subject;
   let player1, player2;
