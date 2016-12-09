@@ -1,4 +1,4 @@
-describe("PlayerService", function () {
+describe("PlayerService", () => {
   let subject;
   let player1, player2;
 
@@ -9,19 +9,19 @@ describe("PlayerService", function () {
     return subject;
   }
 
-  beforeEach(function () {
+  beforeEach(() => {
     createSubject();
   });
 
-  describe('#next', function () {
-    it('moves to next player and returns it', function () {
+  describe('#next', () => {
+    it('moves to next player and returns it', () => {
       expect(subject.next()).toEqual(player2);
       expect(subject.next()).toEqual(player1);
     });
   });
 
-  describe('#currentPlayer', function () {
-    it('returns the current player', function () {
+  describe('#currentPlayer', () => {
+    it('returns the current player', () => {
       expect(subject.currentPlayer()).toEqual(player1);
     });
   });

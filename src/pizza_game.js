@@ -12,13 +12,13 @@ class PizzaGame {
   }
   _attachListeners() {
     document.getElementById('submit').addEventListener('click', () => {
-      this.call(this._currentSelectVal());
+      this.call(PizzaGame.currentSelectVal());
     });
   }
 
-  _currentSelectVal() {
-    let selectedOption = this._select().options[this._select().selectedIndex];
-    return selectedOption.value !== 'null' ? parseInt(selectedOption.value): null;
+  static currentSelectVal() {
+    const selectedOption = PizzaGame.select().options[PizzaGame.select().selectedIndex];
+    return selectedOption.value !== 'null' ? parseInt(selectedOption.value, 10) : null;
   }
 
   _updateUI() {
@@ -31,20 +31,20 @@ class PizzaGame {
   }
 
   _updateUIEatOptions() {
-    let selectOptions = [];
-    this._select().options.length = 0;
+    const selectOptions = [];
+    PizzaGame.select().options.length = 0;
 
-    this.eatOptions().forEach( (option) => {
-      this._select().options[this._select().options.length] = new Option(option,option);
+    this.eatOptions().forEach((option) => {
+      PizzaGame.select().options[PizzaGame.select().options.length] = new Option(option, option);
     });
 
     // handle no eatOptions left case
-    if(this.eatOptions().length === 0) {
-      this._select().options[0] = new Option('nessuna pizza',null);
+    if (this.eatOptions().length === 0) {
+      PizzaGame.select().options[0] = new Option('nessuna pizza', null);
     }
   }
 
-  _select() {
+  static select() {
     return document.getElementById('js-pizza-slices-count');
   }
 
@@ -52,13 +52,13 @@ class PizzaGame {
     if (this.gameOver) {
       return `Mi dispiace ${this.playerService.currentPlayer()}, hai perso!`;
     } else if (!this._anyEatOptionsLeft()) {
-      return `${this.playerService.currentPlayer()}, non hai mosse disponibili. Devi passare il turno.` + this._availablePizzasMessage();
+      return `${this.playerService.currentPlayer()}, non hai mosse disponibili. Devi passare il turno. ${this._availablePizzasMessage()}`;
     }
-    return `${this.playerService.currentPlayer()} fai la tua mossa.` + this._availablePizzasMessage();
+    return `${this.playerService.currentPlayer()} fai la tua mossa. ${this._availablePizzasMessage()}`;
   }
 
   _availablePizzasMessage() {
-    return ` (pizze disponibili: ${this.eatPizzaService.pizzasCount})`;
+    return `(pizze disponibili: ${this.eatPizzaService.pizzasCount})`;
   }
 
   eatOptions() {

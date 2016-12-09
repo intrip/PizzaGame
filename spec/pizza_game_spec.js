@@ -1,4 +1,4 @@
-describe("PizzaGame", function () {
+describe("PizzaGame", () => {
   let subject, sliceCount;
 
   function createSubject() {

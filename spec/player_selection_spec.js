@@ -1,4 +1,4 @@
-describe('PlayerSelection', function () {
+describe('PlayerSelection', () => {
   let subject;
   function createSubject() {
     subject = new PlayerSelection();
@@ -17,23 +17,23 @@ describe('PlayerSelection', function () {
     fixture.cleanup();
   });
 
-  describe('#call', function () {
-    it('validates_presence_of player1 first_name', function () {
+  describe('#call', () => {
+    it('validates_presence_of player1 first_name', () => {
       submit();
       expect(document.getElementById(`js-error-player1-firstName`).innerHTML)
         .toEqual('campo obbligatorio');
     });
-    it('validates_presence_of player1 last_name', function () {
+    it('validates_presence_of player1 last_name', () => {
       submit();
       expect(document.getElementById(`js-error-player1-lastName`).innerHTML)
         .toEqual('campo obbligatorio');
     });
-    it('validates_presence_of player2 first_name', function () {
+    it('validates_presence_of player2 first_name', () => {
       submit();
       expect(document.getElementById(`js-error-player2-firstName`).innerHTML)
         .toEqual('campo obbligatorio');
     });
-    it('validates_presence_of player2 last_name', function () {
+    it('validates_presence_of player2 last_name', () => {
       submit();
       expect(document.getElementById(`js-error-player2-lastName`).innerHTML)
         .toEqual('campo obbligatorio');
@@ -46,10 +46,10 @@ describe('PlayerSelection', function () {
         document.getElementById('js-player2-last-name').value = 'Rossi';
         submit();
       });
-      it('creates a new game', function () {
+      it('creates a new game', () => {
         expect(subject.pizzaGame).not.toBeUndefined();
       });
-      it('hides #js-player-selection and shows #js-game-info', function () {
+      it('hides #js-player-selection and shows #js-game-info', () => {
         expect(document.getElementById('js-player-selection').style.display).toEqual('none');
         expect(document.getElementById('js-game-info').style.display).toEqual('block');
       });

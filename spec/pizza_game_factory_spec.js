@@ -1,4 +1,4 @@
-describe('PizzaGameFactory', function () {
+describe('PizzaGameFactory', () => {
   beforeEach( () => {
     fixture.load('game.html');
   });
@@ -6,7 +6,7 @@ describe('PizzaGameFactory', function () {
   afterEach(() => {
     fixture.cleanup();
   });
-  
+
   it('creates a new pizzaGame', () => {
     let players= [{firstName: 'jacopo', lastName: 'beschi'},
                   {firstName: 'foo', lastName: 'bar'}];

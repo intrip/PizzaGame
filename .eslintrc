@@ -10,11 +10,19 @@
     "no-var": 0,
     "global-require": 0,
     "block-scoped-var": 0,
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "no-unused-vars": 0
     },
   "extends": "airbnb-base",
   "globals": {
     "gl": false,
+    "PizzaGameFactory": true,
+    "Player": true,
+    "EatPizzaService": true,
+    "RandomGenerator": true,
+    "PlayerService": true,
+    "PizzaGame": true,
+    "PlayerSelection": true
   },
     "plugins": [
     "filenames"
