@@ -1,3 +1,6 @@
+/**
+ * The main game logic and UI interaction
+ */
 class PizzaGame {
   constructor({ playerService, eatPizzaService }) {
     this.playerService = playerService;
@@ -35,6 +38,7 @@ class PizzaGame {
   _updateUI() {
     this._updateUIMessage();
     this._updateUIEatOptions();
+    this._updateUIGameOver();
   }
 
   _updateUIMessage() {
@@ -55,17 +59,27 @@ class PizzaGame {
     }
   }
 
+  _updateUIGameOver() {
+    if (this.gameOver === true) {
+      const jsMessage = document.getElementById('js-message');
+      document.getElementById('js-game-form').style.display = 'none';
+      jsMessage.classList.remove('bg-success');
+      jsMessage.classList.add('bg-danger');
+      document.getElementById('js-new-game').style.display = 'block';
+    }
+  }
+
   /**
    * Used to obtain the game info message
    * @return [String] message
    */
   message() {
     if (this.gameOver) {
-      return `Mi dispiace ${this.playerService.currentPlayer()}, hai perso!`;
+      return `Mi dispiace <b>${this.playerService.currentPlayer()}</b>, hai perso!`;
     } else if (!this._anyEatOptionsLeft()) {
-      return `${this.playerService.currentPlayer()}, non hai mosse disponibili. Devi passare il turno. ${this._availablePizzasMessage()}`;
+      return `<b>${this.playerService.currentPlayer()}</b>, non hai mosse disponibili. Devi passare il turno. ${this._availablePizzasMessage()}`;
     }
-    return `${this.playerService.currentPlayer()} fai la tua mossa. ${this._availablePizzasMessage()}`;
+    return `<b>${this.playerService.currentPlayer()}</b> fai la tua mossa. ${this._availablePizzasMessage()}`;
   }
 
   _availablePizzasMessage() {

@@ -1,4 +1,7 @@
 const UNFILTERED_EAT_OPTIONS = [1, 2, 3];
+/**
+ * Handles the creation of pizzas and the eating of them
+ */
 class EatPizzaService {
   constructor(randomGenerator) {
     this.randomGenerator = randomGenerator;

@@ -1,60 +1,107 @@
 <!doctype html>
 <html lang="en">
 <head>
-   <meta charset="utf-8">
-   <title>Pizza Game</title>
-   <meta name="description" content="A simple pizza game">
-   <meta name="author" content="Jacopo Beschi">
-
-   <script src="random_generator.js"></script>
-   <script src="eat_pizza_service.js"></script>
-   <script src="player.js"></script>
-   <script src="player_service.js"></script>
-   <script src="pizza_game_factory.js"></script>
-   <script src="pizza_game.js"></script>
-   <script src="player_selection.js"></script>
-   <script src="main.js"></script>
+  <meta charset="utf-8">
+  <title>Pizza Game</title>
+  <meta name="description" content="A simple pizza game">
+  <meta name="author" content="Jacopo Beschi">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="random_generator.js"></script>
+  <script src="eat_pizza_service.js"></script>
+  <script src="player.js"></script>
+  <script src="player_service.js"></script>
+  <script src="pizza_game_factory.js"></script>
+  <script src="pizza_game.js"></script>
+  <script src="player_selection.js"></script>
+  <script src="main.js"></script>
 </head>
 <body>
-  <h1>Pizza Game</h1>
-
   <div class="container">
-    <div class="description">
-      <!--  here add the rules -->
-    </div>
-    <div id="js-player-selection">
-      <div>
-        <div><h3>Giocatore1</h3></div>
-        <label for="js-player1-first-name">Nome:
-          <input type="text" id="js-player1-first-name">
-          <span class="text text-danger" id="js-error-player1-firstName"></span>
-        </label>
-        <label for="js-player2-first-name">Cognome:
-          <input type="text" id="js-player1-last-name">
-          <span class="text text-danger" id="js-error-player1-lastName"></span>
-        </label>
+    <div class="panel panel-default panel-primary game-panel">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="glyphicon glyphicon-equalizer"></i> Pizza Game</h3>
       </div>
-      <div>
-        <div><h3>Giocatore2</h3></div>
-        <label for="js-player2-first-name">Nome:
-          <input type="text" id="js-player2-first-name">
-          <span class="text text-danger" id="js-error-player2-firstName"></span>
-        </label>
-        <label for="js-player2-last-name">Cognome:
-          <input type="text" id="js-player2-last-name">
-          <span class="text text-danger" id="js-error-player2-lastName"></span>
-        </label>
-      </div>
-      <div>
-        <button id="submit-players">Conferma</button>
-      </div>
-    </div>
+      <div class="panel-body">
+        <details class="detail-info">
+          <summary>
+            <b>Regole del gioco</b>
+          </summary>
+          <ul class="detail">
+            <li>
+              I giocatori in gioco devono essere 2
+            </li>
+            <li>
+              Il numero di pizze viene determinato randomicamente all'inizio del gioco e deve essere sempre maggiore di 10
+            </li>
+            <li>
+              Ogni giocatore, durante il proprio turno, deve mangiare 1, 2 o 3 pizze
+            </li>
+            <li>
+              Ogni giocatore non puó saltare il proprio turno
+            </li>
+            <li>
+              Ogni giocatore non puó ripetere la scelta fatta in precedenza dall'avversario (per esempio: se il giocatore di turno decide di mangiare 1 pizza, allora l'altro giocatore è obbligato a mangiare 2 oppure 3 pizze)
+            </li>
+            <li>
+              Se un giocatore durante il proprio turno non ha mosse valide (per esempio: rimane ancora 1 pizza sul tavolo e il giocatore precedente ha mangiato 1 pizza) allora viene obbligato a saltare il proprio turno.
+              A questo punto l'altro giocatore sarà obbligato a mangiare la pizza avvelenata e, di conseguenza, a perdere.
+              Questo è l'unico caso nel quale è consentito il salto del turno
+            </li>
+          </ul>
+        </details>
+        <div id="js-player-selection">
+          <div>
+            <form class="form-horizontal" onsubmit="event.preventDefault()">
+              <fieldset>
+                <legend>Giocatore 1</legend>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="js-player1-first-name" placeholder="Nome">
+                </div>
+                <span class="text text-danger" id="js-error-player1-firstName"></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="js-player1-last-name" placeholder="Cognome">
+                </div>
+                <span class="text text-danger" id="js-error-player1-lastName"></span>
+              </fieldset>
+              <fieldset>
+                <legend>Giocatore 2</legend>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="js-player2-first-name" placeholder="Nome">
+                </div>
+                <span class="text text-danger" id="js-error-player2-firstName"></span>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" class="form-control" id="js-player2-last-name" placeholder="Cognome">
+                </div>
+                <span class="text text-danger" id="js-error-player2-lastName"></span>
+              </div>
+            </fieldset>
+            <div>
+              <button id="submit-players" class="btn btn-default pull-right"><i class="glyphicon glyphicon-play"></i> Inizia la partita</button>
+            </div>
+          </form>
+        </div>
 
-    <div id="js-game-info" style="display:none">
-      <div id="js-message"></div>
-        <select id="js-pizza-slices-count"></select>
-      <div>
-        <button id="submit">Vai</button>
+        <div id="js-game-info" style="display:none">
+          <p id="js-message" class="bg-success message"></p>
+          <form class="form-horizontal" id="js-game-form" onsubmit="event.preventDefault()">
+            <div class="form-group">
+              <label for="js-pizza-slices-count" class="col-sm-4 control-label">Quante pizze vuoi mangiare?</label>
+              <div class="col-sm-8">
+                <select id="js-pizza-slices-count" class="form-control"></select>
+              </div>
+            </div>
+            <div>
+              <button id="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-ok-circle"></i> Conferma</button>
+            </div>
+          </form>
+          <button id="js-new-game" class="btn btn-default pull-right" onClick="location.reload()" style="display:none"><i class="glyphicon glyphicon-repeat"></i> Nuova partita</button>
+        </div>
       </div>
     </div>
   </div>

@@ -99,24 +99,53 @@ describe("PizzaGame", () => {
       });
     });
 
-    it('does nothing if gameOver', () => {
-      subject.gameOver = true;
+    describe('is gameOver', () => {
+      function gameForm() {
+        return document.getElementById('js-game-form');
+      }
 
-      spyOn(subject.eatPizzaService,'eat').and.callThrough();
-      spyOn(subject.playerService,'next').and.callThrough();
+      function message() {
+        return document.getElementById('js-message');
+      }
 
-      subject.call(sliceCount);
+      function newGame() {
+        return document.getElementById('js-new-game');
+      }
 
-      expect(subject.eatPizzaService.eat).not.toHaveBeenCalled();
-      expect(subject.playerService.next).not.toHaveBeenCalled();
-    });
+      beforeEach(() => {
+        subject.gameOver = true;
+      });
+      it('does nothing', () => {
+        spyOn(subject.eatPizzaService,'eat').and.callThrough();
+        spyOn(subject.playerService,'next').and.callThrough();
 
-    it('shows player lost message after gameOver', () => {
-      subject.eatPizzaService.pizzasCount = 1;
-      subject.lastEatSize = null;
-      expected = `Mi dispiace ${subject.playerService.currentPlayer()}, hai perso!`;
-      subject.call(1);
-      expect(subject.message()).toEqual(expected);
+        subject.call(sliceCount);
+
+        expect(subject.eatPizzaService.eat).not.toHaveBeenCalled();
+        expect(subject.playerService.next).not.toHaveBeenCalled();
+      });
+
+      it('hides js-game-form', () => {
+        subject._updateUI();
+        expect(gameForm().style.display).toEqual('none');
+      });
+
+      it('changes js-message class from bg-success to bg-error', () => {
+        expect(message().classList).toContain('bg-success');
+
+        subject._updateUI();
+
+        expect(message().classList).not.toContain('bg-success');
+        expect(message().classList).toContain('bg-danger');
+      });
+
+      it('shows new game btn', () => {
+        expect(newGame().style.display).toEqual('none');
+
+        subject._updateUI();
+
+        expect(newGame().style.display).toEqual('block');
+      });
     });
 
     it('calls #_updateUI', () => {
@@ -165,11 +194,11 @@ describe("PizzaGame", () => {
   describe('#message', () => {
     it('returns the current player next step message', () => {
       subject.eatPizzaService.pizzasCount = 1;
-        expect(subject.message()).toEqual("jacopo beschi fai la tua mossa. (pizze disponibili: 1)");
+        expect(subject.message()).toEqual("<b>jacopo beschi</b> fai la tua mossa. (pizze disponibili: 1)");
     });
     it('returns gameover message', () => {
       subject.gameOver = true;
-      expect(subject.message()).toEqual("Mi dispiace jacopo beschi, hai perso!");
+      expect(subject.message()).toEqual("Mi dispiace <b>jacopo beschi</b>, hai perso!");
     });
 
     describe('there are no eatOptions and is not gameOver', () => {
@@ -177,7 +206,7 @@ describe("PizzaGame", () => {
         spyOn(subject.eatPizzaService, 'eatOptions').and.returnValue([]);
       });
       it('returns no options available', function () {
-        expect(subject.message()).toEqual(`jacopo beschi, non hai mosse disponibili. Devi passare il turno. (pizze disponibili: ${subject.eatPizzaService.pizzasCount})`);
+        expect(subject.message()).toEqual(`<b>jacopo beschi</b>, non hai mosse disponibili. Devi passare il turno. (pizze disponibili: ${subject.eatPizzaService.pizzasCount})`);
       });
     });
   });

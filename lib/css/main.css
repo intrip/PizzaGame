@@ -1,0 +1,24 @@
+div.game-panel {
+  margin: 2em 0;
+}
+
+details.detail-info {
+  padding: 0.4em;
+  margin-bottom: 1em;
+  border: 1px solid #337ab7;
+}
+ul.detail {
+  margin: 0.4em 0;
+  font-style: italic;
+}
+
+p.message {
+  padding: 1em;
+  border: 1px solid #ccc;
+}
+
+/* bootstrap overrides */
+
+form div.input-group {
+  margin: 0.6em 0;
+}

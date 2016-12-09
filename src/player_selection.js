@@ -1,6 +1,9 @@
+/**
+ * Handles the Players setup and PizzaGame creation
+ */
 class PlayerSelection {
   constructor() {
-    this.maxPizzaCount = 100;
+    this.maxPizzaCount = 50;
     this._bootstrap();
   }
 

@@ -31,3 +31,28 @@ Il primo giocatore che mangia la pizza avvelenata perde.
 - qualora il candidato decida di realizzare un programma standalone, è preferibile l'utilizzo di un linguaggio di programmazione ad oggetti (C#, Java)
 - qualora il candidato decida di realizzare un'applicazione web, è preferibile l'adozione di Html, Css e Javascript
 - al termine dello sviluppo effettuare una **pull request** sul repository corrente contenente i sorgenti e le istruzioni per eseguire il programma realizzato
+
+## Run instructions
+
+### Requirements
+- npm version 3.x
+- An auto update browser (Chrome/Firefox/Edge) __is advised__ for a better user experience
+- An internet connection is required in order to fetch the css from a CDN
+
+### Setup
+Just run `npm install` and you're set.
+
+### Usage
+
+#### Run the tests
+`npm run test`
+#### Start the app
+Run `npm start`
+Then connect to http://localhost:3000 (if a browser is not automatically opened)
+#### Run the js linter
+`npm run eslint`
+#### Transpile the code
+`npm run build`
+
+If you want to watch for changes run:
+`npm run build:w`
